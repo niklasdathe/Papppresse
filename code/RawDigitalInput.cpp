@@ -7,6 +7,6 @@ RawDigitalInput::RawDigitalInput(uint8_t pin) : pin_(pin) {
 
 bool RawDigitalInput::read() {
     // Read the digital value from the pin
-    return digitalRead(pin_);
+    return digitalRead(pin_) == HIGH;
 }
 

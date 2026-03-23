@@ -1,4 +1,8 @@
+#ifndef BTS7960ACTUATORDRIVE_H
+#define BTS7960ACTUATORDRIVE_H
+
 #include <cstdint>
+#include <Arduino.h>
 #include <IActuatorDrive.h>
 
 class Bts7960ActuatorDrive : public IActuatorDrive {
@@ -15,3 +19,4 @@ class Bts7960ActuatorDrive : public IActuatorDrive {
         uint8_t rEnPin_;
 };
 
+#endif
