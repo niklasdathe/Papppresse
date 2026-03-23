@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0" version="29.6.4">
   <diagram name="Seite-1" id="4HKQeICo_P82HC4xzCwk">
-    <mxGraphModel dx="1646" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3166" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -78,7 +78,7 @@
           <mxGeometry height="30" width="60" x="441" y="910" as="geometry" />
         </mxCell>
         <mxCell id="WbKLbNDMuFTuTmOH9xVF-22" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;IActuatorDrive" vertex="1">
-          <mxGeometry height="102" width="150" x="110" y="400" as="geometry" />
+          <mxGeometry height="102" width="150" x="110" y="432" as="geometry" />
         </mxCell>
         <mxCell id="WbKLbNDMuFTuTmOH9xVF-23" parent="WbKLbNDMuFTuTmOH9xVF-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ extend(): void&lt;br&gt;+ retract(): void&lt;br&gt;+ stop(): void" vertex="1">
           <mxGeometry height="62" width="150" y="40" as="geometry" />
