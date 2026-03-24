@@ -1,3 +1,6 @@
+#ifndef IACTUATORDRIVE_H
+#define IACTUATORDRIVE_H
+
 class IActuatorDrive {
     public:
         // pure virtual functions that must be implemented by any class that inherits
@@ -5,3 +8,5 @@ class IActuatorDrive {
         virtual void retract() = 0;
         virtual void stop() = 0;
 };
+
+#endif
