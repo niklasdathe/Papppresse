@@ -1,0 +1,51 @@
+# AI Generated .gitignore for C/C++ projects, including Arduino and PlatformIO build artifacts.
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Build output (C/C++) ---
+**/build/
+**/cmake-build-*/
+**/out/
+**/bin/
+**/obj/
+**/dist/
+
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.exe
+*.elf
+*.hex
+*.bin
+*.map
+*.d
+
+# --- Arduino build artifacts ---
+*.ino.cpp
+*.ino.cpp.d
+*.eep
+*.core.a
+*.srec
+*.with_bootloader.hex
+code/Arduino.h
+
+# --- PlatformIO (if used locally) ---
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# --- Logs / temp ---
+*.log
+*.tmp
+*.swp
+*~
