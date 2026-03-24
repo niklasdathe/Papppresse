@@ -3,7 +3,7 @@
 
 #include <cstdint>
 #include <Arduino.h>
-#include <IActuatorDrive.h>
+#include "IActuatorDrive.h"
 
 class Bts7960ActuatorDrive : public IActuatorDrive {
     public:
