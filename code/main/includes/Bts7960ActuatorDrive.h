@@ -13,10 +13,10 @@ class Bts7960ActuatorDrive : public IActuatorDrive {
         void stop() override;
 
     private:
-        uint8_t lPwmPin_;
         uint8_t rPwmPin_;
-        uint8_t lEnPin_;
+        uint8_t lPwmPin_;
         uint8_t rEnPin_;
+        uint8_t lEnPin_;
 };
 
 #endif
