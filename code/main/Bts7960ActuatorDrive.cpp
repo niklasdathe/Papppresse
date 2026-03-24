@@ -4,10 +4,10 @@ Bts7960ActuatorDrive::Bts7960ActuatorDrive(uint8_t rPwmPin,
                                            uint8_t lPwmPin,
                                            uint8_t rEnPin,
                                            uint8_t lEnPin)
-    : rPwmPin_(rPwmPin),
-      lPwmPin_(lPwmPin),
-      rEnPin_(rEnPin),
-      lEnPin_(lEnPin)
+        : rPwmPin_(rPwmPin),
+            lPwmPin_(lPwmPin),
+            rEnPin_(rEnPin),
+            lEnPin_(lEnPin)
 {
     pinMode(rPwmPin_, OUTPUT);
     pinMode(lPwmPin_, OUTPUT);
