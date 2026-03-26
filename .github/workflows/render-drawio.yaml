@@ -1,0 +1,29 @@
+name: Render drawio diagrams
+
+on:
+  push:
+    paths:
+      - '**.drawio'
+      - '.github/workflows/render-drawio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Render .drawio files to SVG
+        uses: racklet/render-drawio-action@v1
+        with:
+          formats: svg
+
+      - name: Commit rendered diagrams
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Render drawio diagrams
