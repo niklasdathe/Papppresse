@@ -15,15 +15,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
+      - name: Checkout sources
         uses: actions/checkout@v4
-
-      - name: Render .drawio files to SVG
-        uses: racklet/render-drawio-action@v1
         with:
-          formats: svg
+          fetch-depth: 0
 
-      - name: Commit rendered diagrams
+      - name: Export drawio files to SVG
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          format: svg
+          path: .
+
+      - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Render drawio diagrams
+          commit_message: "docs: sync draw.io exported files"
