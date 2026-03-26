@@ -1,4 +1,4 @@
-"# Papppresse" 
+# Papppresse
 ## Diagrams
 ### class diagram
 ![Architecture](<diagrams/export/class diagramm Papppresse-Seite-1.svg>)
