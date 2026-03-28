@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0" version="29.6.6">
   <diagram name="Seite-1" id="4HKQeICo_P82HC4xzCwk">
-    <mxGraphModel dx="716" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="788" dy="526" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -72,7 +72,7 @@
             <mxRectangle height="40" width="120" x="80" y="480" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="WbKLbNDMuFTuTmOH9xVF-23" parent="WbKLbNDMuFTuTmOH9xVF-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ apply(cmd: DriveCommand): void" vertex="1">
+        <mxCell id="WbKLbNDMuFTuTmOH9xVF-23" parent="WbKLbNDMuFTuTmOH9xVF-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ apply(cmd: DriveCommand): bool" vertex="1">
           <mxGeometry height="30" width="200" y="40" as="geometry" />
         </mxCell>
         <mxCell id="WbKLbNDMuFTuTmOH9xVF-24" parent="Q-WdIFS8AWOqeyrpqGDp-1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Bts7960ActuatorDrive" vertex="1">
@@ -193,11 +193,11 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="120" y="662" />
-              <mxPoint x="120" y="394" />
+              <mxPoint x="120" y="445" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-136" connectable="0" parent="Q-WdIFS8AWOqeyrpqGDp-118" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1..2" vertex="1">
+        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-136" connectable="0" parent="Q-WdIFS8AWOqeyrpqGDp-118" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
           <mxGeometry relative="1" x="0.7968" y="1" as="geometry">
             <mxPoint y="-13" as="offset" />
           </mxGeometry>
@@ -206,7 +206,8 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="150" y="661" />
-              <mxPoint x="150" y="454" />
+              <mxPoint x="150" y="500" />
+              <mxPoint x="304" y="500" />
             </Array>
             <mxPoint x="150" y="650" as="sourcePoint" />
           </mxGeometry>
@@ -216,41 +217,28 @@
             <mxPoint y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-120" edge="1" parent="Q-WdIFS8AWOqeyrpqGDp-18" source="Q-WdIFS8AWOqeyrpqGDp-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.955;exitY=0.006;exitDx=0;exitDy=0;exitPerimeter=0;" target="Q-WdIFS8AWOqeyrpqGDp-101">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="180" y="661" />
-              <mxPoint x="180" y="514" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-137" connectable="0" parent="Q-WdIFS8AWOqeyrpqGDp-120" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="0..1" vertex="1">
-          <mxGeometry relative="1" x="0.6067" y="1" as="geometry">
-            <mxPoint x="35" y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-43" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeWidth=1;" value="PressController" vertex="1">
-          <mxGeometry height="190" width="280" x="15" y="660" as="geometry">
+          <mxGeometry height="160" width="290" x="15" y="660" as="geometry">
             <mxRectangle height="30" width="120" x="380" y="450" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-45" parent="Q-WdIFS8AWOqeyrpqGDp-43" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="280" y="26" as="geometry" />
+          <mxGeometry height="8" width="290" y="26" as="geometry" />
         </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-46" parent="Q-WdIFS8AWOqeyrpqGDp-43" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;strokeWidth=2;" value="+ controlStep(nowMs: uint32): void&lt;br&gt;- applyDriveCommand(cmd: DriveCommand): void&lt;br&gt;- handleCommand(cmd: PressCommand): void&lt;br&gt;- publishState(state: PressState): void&lt;br&gt;- updateDisplay(state: PressState): void&lt;br&gt;&lt;div&gt;- onStateTransition(oldState: PressState, newState: PressState, nowMs: uint32): void&lt;/div&gt;&lt;div&gt;- updateFillLevelOnTransition(oldState: PressState, newState: PressState, nowMs: uint32): void&lt;/div&gt;" vertex="1">
-          <mxGeometry height="156" width="280" y="34" as="geometry" />
+        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-46" parent="Q-WdIFS8AWOqeyrpqGDp-43" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;strokeWidth=2;" value="+ controlStep(&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap; background-color: rgb(255, 255, 255);&quot;&gt;nowMs&lt;/span&gt;): void&lt;br&gt;- applyDriveCommand(cmd: DriveCommand): void&lt;br&gt;- handleCommand(cmd: PressCommand): void&lt;br&gt;- updateDisplay(state: PressState): void&lt;br&gt;&lt;div&gt;- onStateTransition(oldState: PressState, newState: PressState,&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;nowMs: uint32&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;): void&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- updateFillLevelOnTransition(oldState: PressState, newState: PressState, nowMs: uint32): void&lt;/div&gt;" vertex="1">
+          <mxGeometry height="126" width="290" y="34" as="geometry" />
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-47" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="PressFsm" vertex="1">
-          <mxGeometry height="160" width="340" x="15" y="950" as="geometry" />
+          <mxGeometry height="130" width="260" x="15" y="950" as="geometry" />
         </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-48" parent="Q-WdIFS8AWOqeyrpqGDp-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- currentState_: PressState&lt;br&gt;- stateEnteredAtMs_: uint32&lt;br&gt;- pauseDurationMs_: uint32" vertex="1">
-          <mxGeometry height="54" width="340" y="26" as="geometry" />
+        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-48" parent="Q-WdIFS8AWOqeyrpqGDp-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- currentState_: PressState" vertex="1">
+          <mxGeometry height="24" width="260" y="26" as="geometry" />
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-49" parent="Q-WdIFS8AWOqeyrpqGDp-47" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="340" y="80" as="geometry" />
+          <mxGeometry height="8" width="260" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-50" parent="Q-WdIFS8AWOqeyrpqGDp-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ PressFsm()&lt;/div&gt;&lt;div&gt;+ step(inputs: InputSnapshot, nowMs: uint32): FsmStepResult&lt;/div&gt;&lt;div&gt;+ getCurrentState(): PressState&lt;/div&gt;&lt;div&gt;+ reset(): void&lt;/div&gt;" vertex="1">
-          <mxGeometry height="72" width="340" y="88" as="geometry" />
+        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-50" parent="Q-WdIFS8AWOqeyrpqGDp-47" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ PressFsm()&lt;/div&gt;&lt;div&gt;+ step(inputs: InputSnapshot): FsmStepResult&lt;/div&gt;&lt;div&gt;+ getCurrentState(): PressState&lt;/div&gt;&lt;div&gt;+ reset(): void&lt;/div&gt;" vertex="1">
+          <mxGeometry height="72" width="260" y="58" as="geometry" />
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-51" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;PressState" vertex="1">
           <mxGeometry height="230" width="170" x="440" y="899" as="geometry">
@@ -320,7 +308,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-139" connectable="0" parent="Q-WdIFS8AWOqeyrpqGDp-130" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1..2" vertex="1">
+        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-139" connectable="0" parent="Q-WdIFS8AWOqeyrpqGDp-130" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1" vertex="1">
           <mxGeometry relative="1" x="0.8687" y="1" as="geometry">
             <mxPoint x="5" y="21" as="offset" />
           </mxGeometry>
@@ -389,7 +377,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-105" collapsed="1" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;IDisplay&lt;/span&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="40" width="110" x="290" y="434" as="geometry">
+          <mxGeometry height="40" width="110" x="304.35" y="484.93" as="geometry">
             <mxRectangle height="80" width="150" x="210" y="2000" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -397,20 +385,12 @@
           <mxGeometry height="40" width="150" y="40" as="geometry" />
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-103" collapsed="1" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;IActuatorDrive" vertex="1">
-          <mxGeometry height="40" width="120" x="290" y="374" as="geometry">
+          <mxGeometry height="40" width="120" x="304.35" y="424.93" as="geometry">
             <mxRectangle height="102" width="150" x="110" y="1810" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-104" parent="Q-WdIFS8AWOqeyrpqGDp-103" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ extend(): void&lt;br&gt;+ retract(): void&lt;br&gt;+ stop(): void" vertex="1">
           <mxGeometry height="62" width="150" y="40" as="geometry" />
-        </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-101" collapsed="1" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;IConnectivity" vertex="1">
-          <mxGeometry height="40" width="110" x="290" y="494" as="geometry">
-            <mxRectangle height="102" width="270" x="45" y="471" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Q-WdIFS8AWOqeyrpqGDp-102" parent="Q-WdIFS8AWOqeyrpqGDp-101" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;li data-section-id=&quot;1rhuwef&quot; data-start=&quot;5320&quot; data-end=&quot;5338&quot;&gt;&lt;code data-start=&quot;5322&quot; data-end=&quot;5338&quot;&gt;+ publishState(state: PressState): void&lt;/code&gt;&lt;/li&gt;&lt;li data-section-id=&quot;42v7qa&quot; data-start=&quot;5339&quot; data-end=&quot;5357&quot;&gt;&lt;code data-start=&quot;5341&quot; data-end=&quot;5357&quot;&gt;+ pollCommand(): PressCommand[0..1]&lt;/code&gt;&lt;/li&gt;&lt;li data-section-id=&quot;bxytik&quot; data-start=&quot;5358&quot; data-end=&quot;5375&quot;&gt;&lt;code data-start=&quot;5360&quot; data-end=&quot;5375&quot;&gt;+ isConnected(): bool&lt;/code&gt;&lt;/li&gt;" vertex="1">
-          <mxGeometry height="62" width="270" y="40" as="geometry" />
         </mxCell>
         <mxCell id="Q-WdIFS8AWOqeyrpqGDp-99" collapsed="1" parent="Q-WdIFS8AWOqeyrpqGDp-18" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;IDigitalInput" vertex="1">
           <mxGeometry height="40" width="110" x="676.19" y="524.9300000000001" as="geometry">
