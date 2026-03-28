@@ -5,6 +5,8 @@
 ### electrical schematic
 ![Architecture](<diagrams/export/electrical schematic Papppresse-Seite-1.svg>)
 ### sequence diagrams
+#### sequence control cycle
+![Architecture](<diagrams/export/sequence diagram control_cycle Papppresse-Seite-1.svg>)
 #### sequence endstop reached
 ![Architecture](<diagrams/export/sequence diagram endstop_reached Papppresse-Seite-1.svg>)
 ### state diagram
