@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="q_p1EgiZVojoYGpDplps-4" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;recursiveResize=0;container=1;collapsible=0;width=130;height=30;" value="&lt;b&gt;sd&lt;/b&gt; control_cycle" vertex="1">
+        <mxCell id="q_p1EgiZVojoYGpDplps-4" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;recursiveResize=0;container=1;collapsible=0;width=165;height=23;align=left;" value="&lt;b&gt;&amp;nbsp;sd&lt;/b&gt; mqtt_command_ingress" vertex="1">
           <mxGeometry height="350" width="490" x="5" y="7" as="geometry" />
         </mxCell>
         <mxCell id="eM34PI705ndlTNUULUuO-1" parent="q_p1EgiZVojoYGpDplps-4" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlControl;" value="mqttTask:MqttTask&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
