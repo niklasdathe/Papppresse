@@ -11,6 +11,8 @@
 ![Architecture](<diagrams/export/sequence diagram mqtt_command_ingress Papppresse-Seite-1.svg>)
 #### sequence mqtt publsih state
 ![Architecture](<diagrams/export/sequence diagram mqtt_state_publish Papppresse-Seite-1.svg>)
+#### sequence estop tripped
+![Architecture](<diagrams/export/sequence diagram estop_trip Papppresse-Seite-1.svg>)
 #### sequence endstop reached
 ![Architecture](<diagrams/export/sequence diagram endstop_reached Papppresse-Seite-1.svg>)
 ### state diagram
