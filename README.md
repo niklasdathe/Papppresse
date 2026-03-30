@@ -7,9 +7,9 @@
 ### sequence diagrams
 #### sequence control cycle
 ![Architecture](<diagrams/export/sequence diagram control_cycle Papppresse-Seite-1.svg>)
-#### sequence control cycle
+#### sequence mqtt command ingress
 ![Architecture](<diagrams/export/sequence diagram mqtt_command_ingress Papppresse-Seite-1.svg>)
-#### sequence control cycle
+#### sequence mqtt publsih state
 ![Architecture](<diagrams/export/sequence diagram mqtt_state_publish Papppresse-Seite-1.svg>)
 #### sequence endstop reached
 ![Architecture](<diagrams/export/sequence diagram endstop_reached Papppresse-Seite-1.svg>)
