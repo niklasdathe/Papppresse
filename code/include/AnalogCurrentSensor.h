@@ -2,13 +2,13 @@
 
 #include <cstdint>
 
-#include "driver/adc.h"
+#include "esp_adc/adc_oneshot.h"
 
 #include "IOverCurrentDetection.h"
 
 class AnalogCurrentSensor : public IOverCurrentDetection {
 public:
-    AnalogCurrentSensor(uint8_t adcChannel, uint16_t thresholdRaw);
+    AnalogCurrentSensor(adc_channel_t adcChannel, uint16_t thresholdRaw);
 
     uint16_t readRawCurrent() const;
     bool read() override;
@@ -17,6 +17,7 @@ public:
     uint16_t getThresholdRaw() const;
 
 private:
-    adc1_channel_t adcChannel_;
+    adc_oneshot_unit_handle_t adcHandle_;
+    adc_channel_t adcChannel_;
     uint16_t thresholdRaw_;
 };

@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "driver/adc.h"
+#include "hal/adc_types.h"
 
 namespace AppConfig {
 constexpr const char* kLogTag = "Papppresse";
@@ -25,7 +25,7 @@ constexpr uint8_t kStartPulsePin = 8;
 namespace Sensor {
 constexpr uint32_t kDebounceMs = 30;
 constexpr uint16_t kCurrentThresholdRaw = 3000;
-constexpr uint8_t kCurrentAdcChannel = ADC1_CHANNEL_0;
+constexpr adc_channel_t kCurrentAdcChannel = ADC_CHANNEL_0;
 }
 
 namespace Display {

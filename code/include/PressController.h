@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <optional>
 
 #include "CommandQueue.h"
 #include "FillLevelEstimator.h"
@@ -45,4 +46,6 @@ private:
     bool startOverride_{false};
     bool estopLatched_{false};
     bool doorOpenLatched_{false};
+    std::optional<PressState> lastEnqueuedState_{};
+    std::optional<PressState> lastDisplayedState_{};
 };

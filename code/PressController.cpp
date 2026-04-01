@@ -93,8 +93,15 @@ void PressController::controlStep(uint32_t nowMs)
     const FsmStepResult stepResult = fsm_.step(inputs);
 
     applyDriveCommand(stepResult.output.driveCommand);
-    stateQueue_.enqueue(stepResult.state);
-    updateDisplay(stepResult.state);
+    if (!lastEnqueuedState_.has_value() || *lastEnqueuedState_ != stepResult.state) {
+        if (stateQueue_.enqueue(stepResult.state)) {
+            lastEnqueuedState_ = stepResult.state;
+        }
+    }
+    if (!lastDisplayedState_.has_value() || *lastDisplayedState_ != stepResult.state) {
+        updateDisplay(stepResult.state);
+        lastDisplayedState_ = stepResult.state;
+    }
 
     if (stepResult.state != oldState) {
         onStateTransition(oldState, stepResult.state, nowMs);
