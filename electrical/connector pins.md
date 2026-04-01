@@ -11,8 +11,8 @@
 `X2:4` : DGND  
 
 ### door detection connector (`X3`)
-`X3:1` : door_closed  
-`X3:2` : DGND  
+`X3:1` : DGND  
+`X3:2` : door_closed 
 
 ### start buttons connector (`X4`)
 `X4:1` : start_pressed  
