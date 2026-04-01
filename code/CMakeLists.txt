@@ -1,0 +1,24 @@
+idf_component_register(
+    SRCS
+        "app_main.cpp"
+        "RawDigitalInput.cpp"
+        "DebouncedDigitalInput.cpp"
+        "Bts7960ActuatorDrive.cpp"
+        "LcdDisplayI2C.cpp"
+        "MqttClient.cpp"
+        "AnalogCurrentSensor.cpp"
+        "InputSampler.cpp"
+        "CommandQueue.cpp"
+        "StateQueue.cpp"
+        "FillLevelEstimator.cpp"
+        "PressFsm.cpp"
+        "PressController.cpp"
+        "ControlTask.cpp"
+        "MqttTask.cpp"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+        driver
+        esp_timer
+        freertos
+)

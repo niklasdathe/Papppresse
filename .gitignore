@@ -49,3 +49,8 @@ code/Arduino.h
 *.tmp
 *.swp
 *~
+
+# --- ESP-IDF generated project config ---
+sdkconfig
+sdkconfig.defaults
+sdkconfig.old

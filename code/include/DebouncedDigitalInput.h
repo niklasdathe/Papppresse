@@ -1,8 +1,7 @@
-#ifndef DEBOUNCED_DIGITAL_INPUT_H
-#define DEBOUNCED_DIGITAL_INPUT_H
+#pragma once
 
 #include <cstdint>
-#include <Arduino.h>
+
 #include "IDigitalInput.h"
 
 class DebouncedDigitalInput : public IDigitalInput {
@@ -15,10 +14,8 @@ private:
     IDigitalInput& source_;
     bool activeLow_;
     uint32_t debounceTimeMs_;
-
     bool initialized_;
     bool stableState_;
     bool candidateState_;
     uint32_t lastCandidateChangeMs_;
 };
-#endif
