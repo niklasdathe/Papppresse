@@ -26,11 +26,11 @@ extern "C" void app_main(void)
     static RawDigitalInput doorClosedRaw(AppConfig::InputPins::kDoorClosedPin);
     static RawDigitalInput startPulseRaw(AppConfig::InputPins::kStartPulsePin);
 
-    static DebouncedDigitalInput estopInput(estopRaw, true, AppConfig::Sensor::kDebounceMs);
-    static DebouncedDigitalInput topEndstopInput(topEndstopRaw, true, AppConfig::Sensor::kDebounceMs);
-    static DebouncedDigitalInput bottomEndstopInput(bottomEndstopRaw, true, AppConfig::Sensor::kDebounceMs);
-    static DebouncedDigitalInput doorClosedInput(doorClosedRaw, true, AppConfig::Sensor::kDebounceMs);
-    static DebouncedDigitalInput startPulseInput(startPulseRaw, true, AppConfig::Sensor::kDebounceMs);
+    static DebouncedDigitalInput estopInput(estopRaw, false, AppConfig::Sensor::kDebounceMs); //NC
+    static DebouncedDigitalInput topEndstopInput(topEndstopRaw, false, AppConfig::Sensor::kDebounceMs);//NC
+    static DebouncedDigitalInput bottomEndstopInput(bottomEndstopRaw, false, AppConfig::Sensor::kDebounceMs);//NC
+    static DebouncedDigitalInput doorClosedInput(doorClosedRaw, true, AppConfig::Sensor::kDebounceMs);//NO
+    static DebouncedDigitalInput startButtonInput(startPulseRaw, true, AppConfig::Sensor::kDebounceMs);//NO
 
     static AnalogCurrentSensor currentSensor(AppConfig::Sensor::kCurrentAdcChannel, AppConfig::Sensor::kCurrentThresholdRaw);
     static Bts7960ActuatorDrive actuatorDrive(
@@ -46,7 +46,7 @@ extern "C" void app_main(void)
         AppConfig::Connectivity::kPassword);
 
     static InputSampler inputSampler(
-        startPulseInput,
+        startButtonInput,
         doorClosedInput,
         topEndstopInput,
         bottomEndstopInput,

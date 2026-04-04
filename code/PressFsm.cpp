@@ -29,9 +29,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
 
     switch (currentState_) {
     case PressState::INIT_CHECK:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (inputs.top_es) {
+        if (inputs.top_es) {
             nextState = PressState::READY_TOP;
         } else if (inputs.door_closed) {
             nextState = PressState::INIT_UP;
@@ -41,9 +39,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
         break;
 
     case PressState::INIT_UP:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::INIT_PAUSE;
         } else if (inputs.top_es) {
             nextState = PressState::READY_TOP;
@@ -51,29 +47,21 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
         break;
 
     case PressState::INIT_PAUSE:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
-            nextState = PressState::INIT_PAUSE;
-        } else if (!inputs.top_es) {
+        if (!inputs.top_es && inputs.door_closed) {
             nextState = PressState::INIT_UP;
-        } else {
+        } else if (inputs.top_es) {
             nextState = PressState::READY_TOP;
         }
         break;
 
     case PressState::READY_TOP:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (inputs.door_closed && inputs.start_pressed) {
+        if (inputs.door_closed && inputs.start_pressed) {
             nextState = PressState::PRESS_DOWN;
         }
         break;
 
     case PressState::PRESS_DOWN:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::PAUSE_PRESS;
         } else if (inputs.start_pressed) {
             nextState = PressState::ABORT_LATCH;
@@ -83,9 +71,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
         break;
 
     case PressState::PAUSE_PRESS:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::PAUSE_PRESS;
         } else if (inputs.start_pressed) {
             nextState = PressState::ABORT_LATCH;
@@ -99,28 +85,20 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
         break;
 
     case PressState::RETURN_UP_SUCCESS:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::PAUSE_RETURN_SUCCESS;
         } else if (inputs.start_pressed) {
             nextState = PressState::PRESS_DOWN;
-        } else if (inputs.top_es) {
-            nextState = PressState::PAUSE_RETURN_SUCCESS;
         }
         break;
 
     case PressState::PAUSE_RETURN_SUCCESS:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::PAUSE_RETURN_SUCCESS;
         } else if (inputs.start_pressed) {
             nextState = PressState::PRESS_DOWN;
-        } else if (!inputs.top_es) {
-            nextState = PressState::RETURN_UP_SUCCESS;
         } else {
-            nextState = PressState::READY_TOP;
+            nextState = PressState::RETURN_UP_SUCCESS;
         }
         break;
 
@@ -129,9 +107,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
         break;
 
     case PressState::RETURN_UP_ABORT:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::PAUSE_RETURN_ABORT;
         } else if (inputs.start_pressed) {
             nextState = PressState::PRESS_DOWN;
@@ -141,9 +117,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
         break;
 
     case PressState::PAUSE_RETURN_ABORT:
-        if (inputs.estop) {
-            nextState = PressState::ABORT_LATCH;
-        } else if (!inputs.door_closed) {
+        if (!inputs.door_closed) {
             nextState = PressState::PAUSE_RETURN_ABORT;
         } else if (inputs.start_pressed) {
             nextState = PressState::PRESS_DOWN;

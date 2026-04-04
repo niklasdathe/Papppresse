@@ -22,6 +22,7 @@ constexpr uint8_t kDoorClosedPin = 7;
 constexpr uint8_t kStartPulsePin = 8;
 }
 
+
 namespace Sensor {
 constexpr uint32_t kDebounceMs = 30;
 constexpr uint16_t kCurrentThresholdRaw = 3000;
