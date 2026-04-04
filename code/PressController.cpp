@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "esp_log.h"
+
 namespace {
 const char* toStateString(PressState state)
 {
@@ -104,6 +106,18 @@ void PressController::controlStep(uint32_t nowMs)
     }
 
     if (stepResult.state != oldState) {
+        // Temporary debug trace to verify transition conditions from real inputs.
+        ESP_LOGI(
+            "PressController",
+            "FSM %s -> %s | start=%d top=%d bottom=%d door=%d estop=%d current_over=%d",
+            toStateString(oldState),
+            toStateString(stepResult.state),
+            static_cast<int>(inputs.start_pressed),
+            static_cast<int>(inputs.top_es),
+            static_cast<int>(inputs.bottom_es),
+            static_cast<int>(inputs.door_closed),
+            static_cast<int>(inputs.estop),
+            static_cast<int>(inputs.current_over));
         onStateTransition(oldState, stepResult.state, nowMs);
     }
 
