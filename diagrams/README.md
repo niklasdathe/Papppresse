@@ -16,5 +16,5 @@
 ![Architecture](<export/sequence diagram estop_trip Papppresse-Seite-1.svg>)
 #### sequence endstop reached (UML 2.5.1)
 ![Architecture](<export/sequence diagram endstop_reached Papppresse-Seite-1.svg>)
-### state diagram
-![Architecture](<export/state diagram Papppresse-Seite-1.svg>)
+### state machine diagram (UML 2.5.1)
+![Architecture](<export/state machine Papppresse-Seite-1.svg>)
