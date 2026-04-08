@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Seite-1" id="_RHybEvAkhsW_qkZlSEC">
-    <mxGraphModel dx="1724" dy="1169" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1552" dy="1052" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -453,7 +453,10 @@
           <mxGeometry height="60" width="100" x="289" y="205" as="geometry" />
         </mxCell>
         <mxCell id="JHRkUejtQgRVR0mWre2v-130" parent="1" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=left;" value="&lt;div&gt;&lt;font face=&quot;monospace&quot;&gt;&amp;nbsp;Priority in Operational substates:&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;ol&gt;&lt;li&gt;&lt;font face=&quot;monospace&quot;&gt;hardSafetyFault&lt;/font&gt;&lt;/li&gt;&lt;li&gt;doorOpened&lt;/li&gt;&lt;li&gt;completion (topEndstopReached, bottomEndstopReached, overCurrentDetected)&lt;/li&gt;&lt;li&gt;startPressed&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="140" width="306" x="800" y="120" as="geometry" />
+          <mxGeometry height="140" width="330" x="800" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="JHRkUejtQgRVR0mWre2v-131" parent="1" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=top;align=center;" value="Abort while paused is not implemented. If feature is wanted:&amp;nbsp;&lt;br&gt;PAUSE_PRESS -- startPressed / abortPulse() --&amp;gt; PAUSE_RETURN_ABORTED" vertex="1">
+          <mxGeometry height="100" width="330" x="800" y="280" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
