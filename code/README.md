@@ -18,6 +18,19 @@ idf.py build
 idf.py flash monitor
 ```
 
+### Input diagnostics mode (state machine input check)
+Use this mode to validate the exact input stack used by the state machine, including:
+- raw GPIO levels
+- debounced and polarity-mapped active states
+- InputSampler rising-edge flags (`*_reached`, `*_detected`)
+
+How to enable:
+1. In `code/include/AppConfig.h`, set `AppConfig::Diagnostics::kEnableInputDiagnosticsOnly` to `true`.
+2. Build, flash, and open monitor.
+3. Operate each input and verify logs from tag `InputDiag`.
+
+The diagnostics loop reuses the same classes and configuration as production (`RawDigitalInput`, `DebouncedDigitalInput`, `AnalogCurrentSensor`, `InputSampler`, and `AppConfig` pin/polarity constants).
+
 ### Source layout
 - `code/app_main.cpp`: Runtime wiring and task startup
 - `code/include`: Interfaces, data types, and class headers

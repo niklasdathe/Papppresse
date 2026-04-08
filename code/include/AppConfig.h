@@ -15,11 +15,20 @@ constexpr uint8_t kLenablePin = 48;
 }
 
 namespace InputPins {
-constexpr uint8_t kEStopPin = 4;
-constexpr uint8_t kTopEndstopPin = 5;
-constexpr uint8_t kBottomEndstopPin = 6;
-constexpr uint8_t kDoorClosedPin = 7;
-constexpr uint8_t kStartPulsePin = 8;
+constexpr uint8_t kEStopPin = 11; // DI8
+constexpr uint8_t kTopEndstopPin = 10; //DI7
+constexpr uint8_t kBottomEndstopPin = 9; //DI6
+constexpr uint8_t kDoorClosedPin = 8; //DI5
+constexpr uint8_t kStartPulsePin = 7; //DI4
+}
+
+namespace InputLogic {
+// Active-low means electrical low on the pin equals logical active.
+constexpr bool kEStopActiveLow = true;
+constexpr bool kTopEndstopActiveLow = false;
+constexpr bool kBottomEndstopActiveLow = false;
+constexpr bool kDoorClosedActiveLow = true;
+constexpr bool kStartPulseActiveLow = true;
 }
 
 
@@ -56,6 +65,15 @@ constexpr int kControlPriority = 10;
 constexpr int kMqttPriority = 5;
 constexpr int kControlCore = 0;
 constexpr int kMqttCore = 1;
+}
+
+namespace Diagnostics {
+// Run only the input diagnostic loop instead of the full runtime.
+constexpr bool kEnableInputDiagnosticsOnly = false;
+// Sampling period for the diagnostic snapshot loop.
+constexpr uint32_t kInputDiagnosticsSamplePeriodMs = Runtime::kControlPeriodMs;
+// Full heartbeat period; change-triggered logs are emitted immediately.
+constexpr uint32_t kInputDiagnosticsHeartbeatMs = 1000;
 }
 
 namespace FillLevel {

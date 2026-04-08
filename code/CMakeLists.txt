@@ -8,6 +8,7 @@ idf_component_register(
         "MqttClient.cpp"
         "AnalogCurrentSensor.cpp"
         "InputSampler.cpp"
+        "InputDiagnostics.cpp"
         "CommandQueue.cpp"
         "StateQueue.cpp"
         "FillLevelEstimator.cpp"

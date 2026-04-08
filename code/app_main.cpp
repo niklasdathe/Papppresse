@@ -6,6 +6,7 @@
 #include "DebouncedDigitalInput.h"
 #include "FillLevelEstimator.h"
 #include "InputSampler.h"
+#include "InputDiagnostics.h"
 #include "LcdDisplayI2C.h"
 #include "MqttClient.h"
 #include "MqttTask.h"
@@ -20,17 +21,22 @@ extern "C" void app_main(void)
 {
     ESP_LOGI(AppConfig::kLogTag, "Starting ESP-IDF Papppresse runtime");
 
+    if (AppConfig::Diagnostics::kEnableInputDiagnosticsOnly) {
+        runInputDiagnostics();
+        return;
+    }
+
     static RawDigitalInput estopRaw(AppConfig::InputPins::kEStopPin);
     static RawDigitalInput topEndstopRaw(AppConfig::InputPins::kTopEndstopPin);
     static RawDigitalInput bottomEndstopRaw(AppConfig::InputPins::kBottomEndstopPin);
     static RawDigitalInput doorClosedRaw(AppConfig::InputPins::kDoorClosedPin);
     static RawDigitalInput startPulseRaw(AppConfig::InputPins::kStartPulsePin);
 
-    static DebouncedDigitalInput estopInput(estopRaw, true, AppConfig::Sensor::kDebounceMs); // TODO NC when actually wired, but for testing we want it to be active when the pin is high
-    static DebouncedDigitalInput topEndstopInput(topEndstopRaw, false, AppConfig::Sensor::kDebounceMs);//NC
-    static DebouncedDigitalInput bottomEndstopInput(bottomEndstopRaw, false, AppConfig::Sensor::kDebounceMs);//NC
-    static DebouncedDigitalInput doorClosedInput(doorClosedRaw, true, AppConfig::Sensor::kDebounceMs);//NO
-    static DebouncedDigitalInput startButtonInput(startPulseRaw, true, AppConfig::Sensor::kDebounceMs);//NO
+    static DebouncedDigitalInput estopInput(estopRaw, AppConfig::InputLogic::kEStopActiveLow, AppConfig::Sensor::kDebounceMs);
+    static DebouncedDigitalInput topEndstopInput(topEndstopRaw, AppConfig::InputLogic::kTopEndstopActiveLow, AppConfig::Sensor::kDebounceMs);
+    static DebouncedDigitalInput bottomEndstopInput(bottomEndstopRaw, AppConfig::InputLogic::kBottomEndstopActiveLow, AppConfig::Sensor::kDebounceMs);
+    static DebouncedDigitalInput doorClosedInput(doorClosedRaw, AppConfig::InputLogic::kDoorClosedActiveLow, AppConfig::Sensor::kDebounceMs);
+    static DebouncedDigitalInput startButtonInput(startPulseRaw, AppConfig::InputLogic::kStartPulseActiveLow, AppConfig::Sensor::kDebounceMs);
 
     static AnalogCurrentSensor currentSensor(AppConfig::Sensor::kCurrentAdcChannel, AppConfig::Sensor::kCurrentThresholdRaw);
     static Bts7960ActuatorDrive actuatorDrive(
