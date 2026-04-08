@@ -44,8 +44,7 @@ private:
     FillLevelEstimator& fillLevelEstimator_;
 
     bool startOverride_{false};
-    bool estopLatched_{false};
-    bool doorOpenLatched_{false};
+    bool faultResetRequested_{false};
     std::optional<PressState> lastEnqueuedState_{};
     std::optional<PressState> lastDisplayedState_{};
 };

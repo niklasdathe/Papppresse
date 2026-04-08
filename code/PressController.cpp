@@ -8,30 +8,26 @@ namespace {
 const char* toStateString(PressState state)
 {
     switch (state) {
-    case PressState::INIT_CHECK:
-        return "INIT_CHECK";
-    case PressState::INIT_UP:
-        return "INIT_UP";
     case PressState::INIT_PAUSE:
         return "INIT_PAUSE";
+    case PressState::INIT_UP:
+        return "INIT_UP";
     case PressState::READY_TOP:
         return "READY_TOP";
     case PressState::PRESS_DOWN:
         return "PRESS_DOWN";
     case PressState::PAUSE_PRESS:
         return "PAUSE_PRESS";
-    case PressState::SUCCESS_LATCH:
-        return "SUCCESS_LATCH";
+    case PressState::RETURN_UP_ABORTED:
+        return "RETURN_UP_ABORTED";
     case PressState::RETURN_UP_SUCCESS:
         return "RETURN_UP_SUCCESS";
+    case PressState::PAUSE_RETURN_ABORTED:
+        return "PAUSE_RETURN_ABORTED";
     case PressState::PAUSE_RETURN_SUCCESS:
         return "PAUSE_RETURN_SUCCESS";
-    case PressState::ABORT_LATCH:
-        return "ABORT_LATCH";
-    case PressState::RETURN_UP_ABORT:
-        return "RETURN_UP_ABORT";
-    case PressState::PAUSE_RETURN_ABORT:
-        return "PAUSE_RETURN_ABORT";
+    case PressState::SAFE_STOP:
+        return "SAFE_STOP";
     default:
         return "UNKNOWN";
     }
@@ -39,12 +35,12 @@ const char* toStateString(PressState state)
 
 bool isReturnMoveState(PressState state)
 {
-    return state == PressState::RETURN_UP_SUCCESS || state == PressState::RETURN_UP_ABORT;
+    return state == PressState::RETURN_UP_SUCCESS || state == PressState::RETURN_UP_ABORTED;
 }
 
 bool isReturnPauseState(PressState state)
 {
-    return state == PressState::PAUSE_RETURN_SUCCESS || state == PressState::PAUSE_RETURN_ABORT;
+    return state == PressState::PAUSE_RETURN_SUCCESS || state == PressState::PAUSE_RETURN_ABORTED;
 }
 }
 
@@ -82,14 +78,8 @@ void PressController::controlStep(uint32_t nowMs)
     if (startOverride_) {
         inputs.start_pressed = true;
     }
-
-    if (estopLatched_) {
-        inputs.estop = true;
-    }
-
-    if (doorOpenLatched_) {
-        inputs.door_closed = false;
-    }
+    inputs.fault_reset_requested = faultResetRequested_;
+    faultResetRequested_ = false;
 
     const PressState oldState = fsm_.getCurrentState();
     const FsmStepResult stepResult = fsm_.step(inputs);
@@ -109,24 +99,21 @@ void PressController::controlStep(uint32_t nowMs)
         // Temporary debug trace to verify transition conditions from real inputs.
         ESP_LOGI(
             "PressController",
-            "FSM %s -> %s | start=%d top=%d bottom=%d door=%d estop=%d current_over=%d",
+            "FSM %s -> %s | start=%d topA=%d topR=%d bottomA=%d bottomR=%d door=%d estop=%d overA=%d overD=%d",
             toStateString(oldState),
             toStateString(stepResult.state),
             static_cast<int>(inputs.start_pressed),
-            static_cast<int>(inputs.top_es),
-            static_cast<int>(inputs.bottom_es),
+            static_cast<int>(inputs.top_endstop_active),
+            static_cast<int>(inputs.top_endstop_reached),
+            static_cast<int>(inputs.bottom_endstop_active),
+            static_cast<int>(inputs.bottom_endstop_reached),
             static_cast<int>(inputs.door_closed),
             static_cast<int>(inputs.estop),
-            static_cast<int>(inputs.current_over));
+            static_cast<int>(inputs.over_current_active),
+            static_cast<int>(inputs.over_current_detected));
         onStateTransition(oldState, stepResult.state, nowMs);
     }
 
-    if (stepResult.state == PressState::READY_TOP) {
-        doorOpenLatched_ = false;
-        if (!inputs.estop) {
-            estopLatched_ = false;
-        }
-    }
 }
 
 void PressController::applyDriveCommand(DriveCommand cmd)
@@ -147,10 +134,8 @@ void PressController::handleCommand(PressCommand cmd)
         break;
 
     case PressCommand::RESET:
-        fsm_.reset();
         startOverride_ = false;
-        estopLatched_ = false;
-        doorOpenLatched_ = false;
+        faultResetRequested_ = true;
         applyDriveCommand(DriveCommand::STOP);
         break;
 
@@ -183,12 +168,10 @@ void PressController::updateFillLevelOnTransition(PressState oldState, PressStat
 
 void PressController::estopInterrupt()
 {
-    estopLatched_ = true;
     applyDriveCommand(DriveCommand::STOP);
 }
 
 void PressController::doorOpenedInterrupt()
 {
-    doorOpenLatched_ = true;
     applyDriveCommand(DriveCommand::STOP);
 }

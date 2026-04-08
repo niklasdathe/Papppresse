@@ -9,18 +9,16 @@ enum class DriveCommand : uint8_t {
 };
 
 enum class PressState : uint8_t {
-    INIT_CHECK = 0,
+    INIT_PAUSE = 0,
     INIT_UP,
-    INIT_PAUSE,
     READY_TOP,
     PRESS_DOWN,
     PAUSE_PRESS,
-    SUCCESS_LATCH,
+    RETURN_UP_ABORTED,
     RETURN_UP_SUCCESS,
+    PAUSE_RETURN_ABORTED,
     PAUSE_RETURN_SUCCESS,
-    ABORT_LATCH,
-    RETURN_UP_ABORT,
-    PAUSE_RETURN_ABORT,
+    SAFE_STOP,
 };
 
 enum class PressCommand : uint8_t {
@@ -31,11 +29,15 @@ enum class PressCommand : uint8_t {
 
 struct InputSnapshot {
     bool start_pressed{false};
-    bool top_es{false};
-    bool bottom_es{false};
+    bool top_endstop_active{false};
+    bool top_endstop_reached{false};
+    bool bottom_endstop_active{false};
+    bool bottom_endstop_reached{false};
     bool door_closed{false};
     bool estop{false};
-    bool current_over{false};
+    bool over_current_active{false};
+    bool over_current_detected{false};
+    bool fault_reset_requested{false};
 };
 
 struct FsmOutput {
@@ -45,6 +47,6 @@ struct FsmOutput {
 };
 
 struct FsmStepResult {
-    PressState state{PressState::INIT_CHECK};
+    PressState state{PressState::INIT_PAUSE};
     FsmOutput output{};
 };

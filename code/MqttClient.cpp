@@ -8,30 +8,26 @@ constexpr const char* kTag = "MqttClient";
 const char* toStateString(PressState state)
 {
     switch (state) {
-    case PressState::INIT_CHECK:
-        return "INIT_CHECK";
-    case PressState::INIT_UP:
-        return "INIT_UP";
     case PressState::INIT_PAUSE:
         return "INIT_PAUSE";
+    case PressState::INIT_UP:
+        return "INIT_UP";
     case PressState::READY_TOP:
         return "READY_TOP";
     case PressState::PRESS_DOWN:
         return "PRESS_DOWN";
     case PressState::PAUSE_PRESS:
         return "PAUSE_PRESS";
-    case PressState::SUCCESS_LATCH:
-        return "SUCCESS_LATCH";
+    case PressState::RETURN_UP_ABORTED:
+        return "RETURN_UP_ABORTED";
     case PressState::RETURN_UP_SUCCESS:
         return "RETURN_UP_SUCCESS";
+    case PressState::PAUSE_RETURN_ABORTED:
+        return "PAUSE_RETURN_ABORTED";
     case PressState::PAUSE_RETURN_SUCCESS:
         return "PAUSE_RETURN_SUCCESS";
-    case PressState::ABORT_LATCH:
-        return "ABORT_LATCH";
-    case PressState::RETURN_UP_ABORT:
-        return "RETURN_UP_ABORT";
-    case PressState::PAUSE_RETURN_ABORT:
-        return "PAUSE_RETURN_ABORT";
+    case PressState::SAFE_STOP:
+        return "SAFE_STOP";
     default:
         return "UNKNOWN";
     }

@@ -34,7 +34,7 @@ std::optional<PressState> StateQueue::dequeue()
         return std::nullopt;
     }
 
-    PressState state = PressState::INIT_CHECK;
+    PressState state = PressState::INIT_PAUSE;
     if (xQueueReceive(queue_, &state, AppConfig::Runtime::kQueueNoWaitTicks) == pdTRUE) {
         return state;
     }

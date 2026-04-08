@@ -17,6 +17,11 @@ public:
     InputSnapshot sampleInputs();
 
 private:
+    bool initialized_{false};
+    bool prevTopEndstopActive_{false};
+    bool prevBottomEndstopActive_{false};
+    bool prevOverCurrentActive_{false};
+
     IDigitalInput& startButton_;
     IDigitalInput& doorDetection_;
     IDigitalInput& topEndstop_;

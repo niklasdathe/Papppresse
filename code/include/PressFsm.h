@@ -11,5 +11,6 @@ public:
     void reset();
 
 private:
+    bool needsOperationalEntry_{true};
     PressState currentState_;
 };

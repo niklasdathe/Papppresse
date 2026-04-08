@@ -26,7 +26,7 @@ extern "C" void app_main(void)
     static RawDigitalInput doorClosedRaw(AppConfig::InputPins::kDoorClosedPin);
     static RawDigitalInput startPulseRaw(AppConfig::InputPins::kStartPulsePin);
 
-    static DebouncedDigitalInput estopInput(estopRaw, false, AppConfig::Sensor::kDebounceMs); //NC
+    static DebouncedDigitalInput estopInput(estopRaw, true, AppConfig::Sensor::kDebounceMs); // TODO NC when actually wired, but for testing we want it to be active when the pin is high
     static DebouncedDigitalInput topEndstopInput(topEndstopRaw, false, AppConfig::Sensor::kDebounceMs);//NC
     static DebouncedDigitalInput bottomEndstopInput(bottomEndstopRaw, false, AppConfig::Sensor::kDebounceMs);//NC
     static DebouncedDigitalInput doorClosedInput(doorClosedRaw, true, AppConfig::Sensor::kDebounceMs);//NO
