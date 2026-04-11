@@ -43,7 +43,7 @@ private:
     StateQueue& stateQueue_;
     FillLevelEstimator& fillLevelEstimator_;
 
-    bool startOverride_{false};
+    bool startPulseRequested_{false};
     bool faultResetRequested_{false};
     std::optional<PressState> lastEnqueuedState_{};
     std::optional<PressState> lastDisplayedState_{};

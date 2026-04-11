@@ -29,6 +29,7 @@ enum class PressCommand : uint8_t {
 
 struct InputSnapshot {
     bool start_pressed{false};
+    bool start_pressed_rising{false};
     bool top_endstop_active{false};
     bool top_endstop_reached{false};
     bool bottom_endstop_active{false};

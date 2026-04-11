@@ -75,8 +75,10 @@ void PressController::controlStep(uint32_t nowMs)
 
     InputSnapshot inputs = inputSampler_.sampleInputs();
 
-    if (startOverride_) {
+    if (startPulseRequested_) {
         inputs.start_pressed = true;
+        inputs.start_pressed_rising = true;
+        startPulseRequested_ = false;
     }
     inputs.fault_reset_requested = faultResetRequested_;
     faultResetRequested_ = false;
@@ -99,10 +101,11 @@ void PressController::controlStep(uint32_t nowMs)
         // Temporary debug trace to verify transition conditions from real inputs.
         ESP_LOGI(
             "PressController",
-            "FSM %s -> %s | start=%d topA=%d topR=%d bottomA=%d bottomR=%d door=%d estop=%d overA=%d overD=%d",
+            "FSM %s -> %s | start=%d startR=%d topA=%d topR=%d bottomA=%d bottomR=%d door=%d estop=%d overA=%d overD=%d",
             toStateString(oldState),
             toStateString(stepResult.state),
             static_cast<int>(inputs.start_pressed),
+            static_cast<int>(inputs.start_pressed_rising),
             static_cast<int>(inputs.top_endstop_active),
             static_cast<int>(inputs.top_endstop_reached),
             static_cast<int>(inputs.bottom_endstop_active),
@@ -125,16 +128,16 @@ void PressController::handleCommand(PressCommand cmd)
 {
     switch (cmd) {
     case PressCommand::START:
-        startOverride_ = true;
+        startPulseRequested_ = true;
         break;
 
     case PressCommand::STOP:
-        startOverride_ = false;
+        startPulseRequested_ = false;
         applyDriveCommand(DriveCommand::STOP);
         break;
 
     case PressCommand::RESET:
-        startOverride_ = false;
+        startPulseRequested_ = false;
         faultResetRequested_ = true;
         applyDriveCommand(DriveCommand::STOP);
         break;

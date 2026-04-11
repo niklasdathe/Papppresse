@@ -18,6 +18,7 @@ public:
 
 private:
     bool initialized_{false};
+    bool prevStartPressed_{false};
     bool prevTopEndstopActive_{false};
     bool prevBottomEndstopActive_{false};
     bool prevOverCurrentActive_{false};

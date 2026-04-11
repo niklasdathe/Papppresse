@@ -95,7 +95,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
             break;
 
         case PressState::READY_TOP:
-            if (inputs.door_closed && inputs.start_pressed) {
+            if (inputs.door_closed && inputs.start_pressed_rising) {
                 nextState = PressState::PRESS_DOWN;
             }
             break;
@@ -106,7 +106,7 @@ FsmStepResult PressFsm::step(const InputSnapshot& inputs)
             } else if (triggerPressCompletion(inputs)) {
                 nextState = PressState::RETURN_UP_SUCCESS;
                 successPulse = true;
-            } else if (inputs.start_pressed) {
+            } else if (inputs.start_pressed_rising) {
                 nextState = PressState::RETURN_UP_ABORTED;
                 abortPulse = true;
             }
