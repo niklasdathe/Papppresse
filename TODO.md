@@ -5,4 +5,5 @@
 - state diagram has faulty logic, as it moves from PRESS_DOWN direactly to ABORT_LATCH, as they have the same transition conditions.
 - mqtt publish state is currently void. Maybe it should be bool, to ensure the state being published and recieved with republishing logic if no answer is recieved? Or keep it simple? Adjust in sequencediagram/ code to make consistent
 - Change all sequence diagrams to use the uml 2.5.1 compliant lifeline boxes
+- Update `electrical schematic Papppresse.drawio`: RPWM moved GPIO1 -> GPIO45, and L_IS now wired to GPIO1 (ADC1_CH0) for over-current sensing. The old "r_is -> ADC on GPIO1" wiring is superseded (only L_IS is sensed; R_IS unconnected).
 - 

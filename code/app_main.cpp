@@ -38,7 +38,10 @@ extern "C" void app_main(void)
     static DebouncedDigitalInput doorClosedInput(doorClosedRaw, AppConfig::InputLogic::kDoorClosedActiveLow, AppConfig::Sensor::kDebounceMs);
     static DebouncedDigitalInput startButtonInput(startPulseRaw, AppConfig::InputLogic::kStartPulseActiveLow, AppConfig::Sensor::kDebounceMs);
 
-    static AnalogCurrentSensor currentSensor(AppConfig::Sensor::kCurrentAdcChannel, AppConfig::Sensor::kCurrentThresholdRaw);
+    static AnalogCurrentSensor currentSensor(
+        AppConfig::Sensor::kRIsAdcChannel,
+        AppConfig::Sensor::kLIsAdcChannel,
+        AppConfig::Sensor::kCurrentThresholdRaw);
     static Bts7960ActuatorDrive actuatorDrive(
         AppConfig::ActuatorPins::kRpwmpin,
         AppConfig::ActuatorPins::kLpwmpin,

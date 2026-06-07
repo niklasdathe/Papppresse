@@ -19,6 +19,8 @@ struct DiagnosticSnapshot {
     bool bottomEndstopRaw{false};
     bool doorClosedRaw{false};
     bool startPulseRaw{false};
+    uint16_t rIsRaw{0};
+    uint16_t lIsRaw{0};
     uint16_t currentRaw{0};
     InputSnapshot sampled{};
 };
@@ -38,6 +40,8 @@ DiagnosticSnapshot takeSnapshot(
     snapshot.bottomEndstopRaw = bottomEndstopRaw.read();
     snapshot.doorClosedRaw = doorClosedRaw.read();
     snapshot.startPulseRaw = startPulseRaw.read();
+    snapshot.rIsRaw = currentSensor.readChannelRaw(0);
+    snapshot.lIsRaw = currentSensor.readChannelRaw(1);
     snapshot.currentRaw = currentSensor.readRawCurrent();
     snapshot.sampled = inputSampler.sampleInputs();
     return snapshot;
@@ -65,14 +69,17 @@ void logSnapshot(const char* reason, const DiagnosticSnapshot& snapshot)
 {
     ESP_LOGI(
         kDiagTag,
-        "%s | raw estop=%d top=%d bottom=%d door=%d start=%d current=%u | active start=%d topA=%d topR=%d bottomA=%d bottomR=%d door=%d estop=%d overA=%d overD=%d",
+        "%s | raw estop=%d top=%d bottom=%d door=%d start=%d rIs=%u lIs=%u current=%u/thr=%u | active start=%d topA=%d topR=%d bottomA=%d bottomR=%d door=%d estop=%d overA=%d overD=%d",
         reason,
         static_cast<int>(snapshot.estopRaw),
         static_cast<int>(snapshot.topEndstopRaw),
         static_cast<int>(snapshot.bottomEndstopRaw),
         static_cast<int>(snapshot.doorClosedRaw),
         static_cast<int>(snapshot.startPulseRaw),
+        static_cast<unsigned int>(snapshot.rIsRaw),
+        static_cast<unsigned int>(snapshot.lIsRaw),
         static_cast<unsigned int>(snapshot.currentRaw),
+        static_cast<unsigned int>(AppConfig::Sensor::kCurrentThresholdRaw),
         static_cast<int>(snapshot.sampled.start_pressed),
         static_cast<int>(snapshot.sampled.top_endstop_active),
         static_cast<int>(snapshot.sampled.top_endstop_reached),
@@ -179,7 +186,8 @@ void runInputDiagnostics()
         AppConfig::Sensor::kDebounceMs);
 
     static AnalogCurrentSensor currentSensor(
-        AppConfig::Sensor::kCurrentAdcChannel,
+        AppConfig::Sensor::kRIsAdcChannel,
+        AppConfig::Sensor::kLIsAdcChannel,
         AppConfig::Sensor::kCurrentThresholdRaw);
 
     static InputSampler inputSampler(
