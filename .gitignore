@@ -54,3 +54,6 @@ code/Arduino.h
 sdkconfig
 sdkconfig.defaults
 sdkconfig.old
+
+# --- Local tool settings ---
+.claude/
