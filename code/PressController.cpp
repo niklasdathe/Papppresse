@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "AppConfig.h"
 #include "esp_log.h"
 
 namespace {
@@ -84,6 +85,21 @@ void PressController::controlStep(uint32_t nowMs)
     faultResetRequested_ = false;
 
     const PressState oldState = fsm_.getCurrentState();
+
+    // Suppress motor-inrush over-current at the start of the down stroke. When the
+    // press has just (re)entered PRESS_DOWN, ignore over-current for a short window
+    // so the startup current spike doesn't immediately end the stroke.
+    const bool pressingDown = (oldState == PressState::PRESS_DOWN);
+    if (pressingDown && !wasPressingDown_) {
+        downStrokeStartMs_ = nowMs;
+    }
+    wasPressingDown_ = pressingDown;
+    if (pressingDown
+        && (nowMs - downStrokeStartMs_) < AppConfig::Sensor::kOverCurrentStartupBlankingMs) {
+        inputs.over_current_active = false;
+        inputs.over_current_detected = false;
+    }
+
     const FsmStepResult stepResult = fsm_.step(inputs);
 
     applyDriveCommand(stepResult.output.driveCommand);

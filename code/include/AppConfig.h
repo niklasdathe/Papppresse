@@ -27,6 +27,12 @@ constexpr uint8_t kStartPulsePin = 7; //DI4
 }
 
 namespace InputLogic {
+// E-stop is currently handled in hardware/wiring only. The software input pin is
+// unused and left floating, which would otherwise trip SAFE_STOP erratically, so
+// the state machine ignores it. Set true to re-enable software e-stop handling
+// once the pin is properly wired/pulled.
+constexpr bool kEStopEnabled = false;
+
 // Active-low means electrical low on the pin equals logical active.
 constexpr bool kEStopActiveLow = true;
 constexpr bool kTopEndstopActiveLow = false;
@@ -39,29 +45,29 @@ constexpr bool kStartPulseActiveLow = true;
 namespace Sensor {
 constexpr uint32_t kDebounceMs = 30;
 
-// --- Over-current detection (BTS7960 R_IS / L_IS current sense) ---------------
-// During the down stroke the press leaves PRESS_DOWN and returns up once the
-// motor current reaches this limit. This is the knob that sets the pressing
-// force: raise it to press harder, lower it to return earlier.
-constexpr float kOverCurrentLimitAmps = 20.0f;
+// --- Over-current detection (IS sense voltage on the ADC) ----------------------
+// During the down stroke the press leaves PRESS_DOWN and returns up once the ADC
+// voltage on the IS sense line reaches this threshold. The ADC reads 0 V (no load) up to
+// 3.3 V (full scale). Set this trip point directly in volts, calibrated by probing
+// the sense voltage with a multimeter at the pressing force you want. Raise it to
+// press harder, lower it to return earlier.
+constexpr float kOverCurrentTripVolts = 1.2f;
 
-// IS feedback characteristics (BTS7960 datasheet section 4.4.4 + IBT-2 module).
-// The IS pin sources I_IS = I_load / k_ILIS, dropped across R_IS to GND, so
-//   V_IS = I_load * R_IS / k_ILIS.
-constexpr float kCurrentSenseRatio = 8500.0f; // k_ILIS = I_load / I_IS (typ.)
-constexpr float kSenseResistorOhms = 1000.0f; // R_IS / R_L to GND (IBT-2: 1 kOhm)
+// Motor inrush at the start of the down stroke briefly raises the sense voltage,
+// which would otherwise abort the press on the very first sample. Ignore
+// over-current for this long after the press (re)enters PRESS_DOWN. The cardboard
+// is not yet compressed during this window, so suppressing protection here is
+// safe; raise it if startup still trips, lower it to react to real stalls sooner.
+constexpr uint32_t kOverCurrentStartupBlankingMs = 150;
 
 // ESP32-S3 ADC1: 12-bit, 12 dB attenuation (~0..3.3 V usable full scale).
 constexpr uint16_t kAdcMaxCount = 4095;
 constexpr float kAdcFullScaleMilliVolts = 3300.0f;
 
-// Converts a load-current limit (Amperes) into a raw ADC count on an IS channel.
-// Clamped to the ADC range; with R_IS = 1 kOhm the usable limit tops out around
-// 28 A before V_IS saturates the ADC input.
-constexpr uint16_t currentAmpsToRaw(float amps)
+// Converts an ADC trip voltage into a raw ADC count, clamped to the ADC range.
+constexpr uint16_t voltsToRaw(float volts)
 {
-    const float senseMilliVolts = amps * kSenseResistorOhms / kCurrentSenseRatio * 1000.0f;
-    const float raw = senseMilliVolts * static_cast<float>(kAdcMaxCount) / kAdcFullScaleMilliVolts;
+    const float raw = volts * 1000.0f * static_cast<float>(kAdcMaxCount) / kAdcFullScaleMilliVolts;
     if (raw <= 0.0f) {
         return 0;
     }
@@ -71,7 +77,7 @@ constexpr uint16_t currentAmpsToRaw(float amps)
     return static_cast<uint16_t>(raw);
 }
 
-constexpr uint16_t kCurrentThresholdRaw = currentAmpsToRaw(kOverCurrentLimitAmps);
+constexpr uint16_t kCurrentThresholdRaw = voltsToRaw(kOverCurrentTripVolts);
 
 // ADC1 channels wired to the BTS7960 current-sense pins.
 //   ADC1 channel -> GPIO map (ESP32-S3): CH0=GPIO1 .. CH9=GPIO10.

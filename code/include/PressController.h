@@ -47,4 +47,9 @@ private:
     bool faultResetRequested_{false};
     std::optional<PressState> lastEnqueuedState_{};
     std::optional<PressState> lastDisplayedState_{};
+
+    // Startup-inrush blanking for over-current: timestamp of the most recent entry
+    // into PRESS_DOWN and whether we were pressing down on the previous cycle.
+    uint32_t downStrokeStartMs_{0};
+    bool wasPressingDown_{false};
 };

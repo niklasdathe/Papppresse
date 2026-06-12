@@ -1,5 +1,7 @@
 #include "InputSampler.h"
 
+#include "AppConfig.h"
+
 InputSampler::InputSampler(
     IDigitalInput& startButton,
     IDigitalInput& doorDetection,
@@ -28,7 +30,9 @@ InputSnapshot InputSampler::sampleInputs()
     snapshot.top_endstop_active = topEndstopActive;
     snapshot.bottom_endstop_active = bottomEndstopActive;
     snapshot.door_closed = doorDetection_.read();
-    snapshot.estop = estop_.read();
+    // E-stop is handled in hardware for now; ignore the (floating) software pin
+    // unless explicitly re-enabled. See AppConfig::InputLogic::kEStopEnabled.
+    snapshot.estop = AppConfig::InputLogic::kEStopEnabled && estop_.read();
     snapshot.over_current_active = overCurrentActive;
 
     if (initialized_) {
